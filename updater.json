@@ -1,0 +1,16 @@
+{
+  "homepage": "https://github.com/oitsjustjose/Pulver",
+  "promos": {
+
+    "1.11-latest": "1.0.0.0",
+    "1.11-recommended": "1.0.0.0",
+    "1.11.2-latest": "1.0.0.0",
+    "1.11.2-recommended": "1.0.0.0",
+  },
+  "1.11": {
+	"1.0.0.0": "Added: Durability Tooltips & Config Options"
+  },
+  "1.11.2": {
+	"1.0.0.0": "Added: Durability Tooltips & Config Options"
+  }
+}

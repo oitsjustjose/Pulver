@@ -1,0 +1,16 @@
+[
+{
+  "modid": "pulver",
+  "name": "Pulver",
+  "description": "A dynamic dust-adding mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["oitsjustjose"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

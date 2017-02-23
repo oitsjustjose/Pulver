@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "pulver:items/dust_base",
+        "layer1": "pulver:items/dust_overlay"
+    }
+}
