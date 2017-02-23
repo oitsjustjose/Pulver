@@ -18,12 +18,12 @@ public class ItemDust extends Item implements IItemColor
 
 	public ItemDust()
 	{
+		registry = new DustRegistry();
 		this.setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.MATERIALS);
 		this.setUnlocalizedName(Lib.MODID + ".dust");
 		this.setRegistryName(new ResourceLocation(Lib.MODID, "dust"));
 		GameRegistry.register(this);
-		registry = new DustRegistry();
 	}
 
 	public int getMaxSubtypes()
