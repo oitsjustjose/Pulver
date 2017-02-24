@@ -8,10 +8,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SuppressWarnings("deprecation")
 public class ItemDust extends Item implements IItemColor
 {
 	public DustRegistry registry;
@@ -40,7 +42,7 @@ public class ItemDust extends Item implements IItemColor
 	@Override
 	public String getUnlocalizedNameInefficiently(ItemStack itemstack)
 	{
-		return registry.getNameFromMeta(itemstack.getItemDamage()) + " Dust";
+		return registry.getNameFromMeta(itemstack.getItemDamage()) + " " + I18n.translateToLocal("item.dust");
 	}
 
 	@Override

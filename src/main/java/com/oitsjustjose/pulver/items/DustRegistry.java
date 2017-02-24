@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
+
 import com.oitsjustjose.pulver.Pulver;
 
 import net.minecraftforge.oredict.OreDictionary;
@@ -122,9 +123,10 @@ public class DustRegistry
 	private boolean shouldRegister(String name)
 	{
 		// Then checks to see if there's NO other dusts, and an ore AND ingot version exist!
-		if (!OreDictionary.doesOreNameExist("dust" + name) && OreDictionary.getOres("ore" + name).size() > 0 && OreDictionary.getOres("ingot" + name).size() > 0)
-			return true;
-
+		if (OreDictionary.getOres("dust" + name).size() <= 0)
+			if (OreDictionary.getOres("ore" + name).size() > 0)
+				if (OreDictionary.getOres("ingot" + name).size() > 0)
+					return true;
 		return false;
 	}
 
