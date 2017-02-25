@@ -1,5 +1,7 @@
 package com.oitsjustjose.pulver.items;
 
+import java.io.IOException;
+
 import com.oitsjustjose.pulver.Lib;
 
 import net.minecraft.client.renderer.color.IItemColor;
@@ -66,10 +68,19 @@ public class ItemDust extends Item implements IItemColor
 	public int getColorFromItemstack(ItemStack stack, int renderPass)
 	{
 		if (stack.getItemDamage() >= registry.getVariants().length)
+		{
 			return 0;
+		}
 		if (renderPass == 1)
 		{
-			return registry.getColorFromMeta(stack.getItemDamage());
+			try
+			{
+				return registry.getColorFromMeta(stack.getItemDamage());
+			}
+			catch (IOException e)
+			{
+				return 0xFFFFFF;
+			}
 		}
 		else
 			return 10724259;

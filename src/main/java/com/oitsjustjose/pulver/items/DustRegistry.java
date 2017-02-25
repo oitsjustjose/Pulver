@@ -1,45 +1,32 @@
 package com.oitsjustjose.pulver.items;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.Logger;
+import com.oitsjustjose.pulver.ColorUtils;
 
-import com.oitsjustjose.pulver.Pulver;
-
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class DustRegistry
 {
-	private Map<String, Integer> ENTRIES;
+	private Map<String, ItemStack> ENTRIES;
+	private Map<String, Integer> COLORS;
 
 	public DustRegistry()
 	{
-		ENTRIES = new LinkedHashMap<String, Integer>();
+		ENTRIES = new LinkedHashMap<String, ItemStack>();
+		COLORS = new LinkedHashMap<String, Integer>();
 		initEntries();
 	}
 
 	public void initEntries()
 	{
-		if (shouldRegister("Iron"))
-			registerDust("Iron", 12428902);
-
-		if (shouldRegister("Gold"))
-			registerDust("Gold", 16772608);
-
-		if (shouldRegister("Copper"))
-			registerDust("Copper", 16034370);
-
-		if (shouldRegister("Tin"))
-			registerDust("Tin", 14408667);
-
-		if (shouldRegister("Silver"))
-			registerDust("Silver", 13687771);
-
-		if (shouldRegister("Lead"))
-			registerDust("Lead", 3617594);
-
-		parseConfig();
+		for (String ore : OreDictionary.getOreNames())
+			if (ore.startsWith("ore"))
+				if (shouldRegister(ore.substring(3)))
+					registerDust(ore.substring(3), OreDictionary.getOres("ingot" + (ore.substring(3))).get(0));
 	}
 
 	/**
@@ -62,16 +49,28 @@ public class DustRegistry
 	/**
 	 * @param meta
 	 * @return The int color value affiliated with the metadata of the item
+	 * @throws IOException
 	 */
-	public int getColorFromMeta(int meta)
+	public int getColorFromMeta(int meta) throws IOException
 	{
+		// Tallies through to keep up with meta
 		int marker = 0;
-		for (int i : ENTRIES.values())
+		// Goes through every string
+		for (String s : ENTRIES.keySet())
 		{
+			// Once it's found the entry matching meta:
 			if (marker == meta)
-				return i;
+			{
+				// It checks to see if the color has been evaluated yet
+				if (COLORS.get(s) == -1)
+					COLORS.put(s, ColorUtils.getColor(ENTRIES.get(s)));
+				// Returns the calculated color from ColorUtils
+				return COLORS.get(s);
+			}
+			// Increments until it matches meta
 			marker++;
 		}
+		// Worse case: no bueno
 		return 0;
 	}
 
@@ -99,7 +98,14 @@ public class DustRegistry
 	 */
 	public int getColorFromName(String name)
 	{
-		return ENTRIES.get(name);
+		try
+		{
+			return ColorUtils.getColor(ENTRIES.get(name));
+		}
+		catch (IOException e)
+		{
+			return 0xFFFFFF;
+		}
 	}
 
 	/**
@@ -110,9 +116,10 @@ public class DustRegistry
 	 * 
 	 *            Creates a dust variant, adds this dust to the ore dictionary, and auto-adds smelting recipes
 	 */
-	public void registerDust(String name, int colorVal)
+	public void registerDust(String name, ItemStack linkedIngot)
 	{
-		ENTRIES.put(name, colorVal);
+		ENTRIES.put(name, linkedIngot);
+		COLORS.put(name, -1);
 	}
 
 	/**
@@ -120,48 +127,13 @@ public class DustRegistry
 	 *            The OreDict Name to to check for registration status
 	 * @return True if there isn't a dust, and IS an ore and ingot for name
 	 */
-	private boolean shouldRegister(String name)
-	{
-		// Then checks to see if there's NO other dusts, and an ore AND ingot version exist!
-		if (OreDictionary.getOres("dust" + name).size() <= 0)
-			if (OreDictionary.getOres("ore" + name).size() > 0)
-				if (OreDictionary.getOres("ingot" + name).size() > 0)
-					return true;
-		return false;
-	}
-
-	/**
-	 * Parses through the config
-	 */
-	private void parseConfig()
-	{
-
-		Logger log = Pulver.LOGGER;
-		log.info("Parsing Config Entries");
-		for (String s : Pulver.config.manualEntries)
-		{
-			String[] temp = s.split(":");
-			// In a try catch to confirm formatting
-			try
-			{
-				// Normalizes Names
-				String cleaned = temp[0];
-				if (cleaned.startsWith("ore"))
-					cleaned = cleaned.replace("ore", "");
-				else if (cleaned.startsWith("ingot"))
-					cleaned = cleaned.replace("ingot", "");
-
-				if (shouldRegister(cleaned))
-					registerDust(cleaned, Integer.parseInt(temp[1]));
-				else
-					log.info(s + " could not be registered; it may be missing an Ore or Ingot, or already have a dust!");
-			}
-			catch (NumberFormatException | IndexOutOfBoundsException e)
-			{
-				log.info(s + " is not formatted properly. Skipping entry.");
-			}
-		}
-
-		log.info("Finished Parsing!");
-	}
+	 private boolean shouldRegister(String name)
+ 	{
+ 		// Then checks to see if there's NO other dusts, and an ore AND ingot version exist!
+ 		if (OreDictionary.getOres("dust" + name).size() <= 0)
+ 			if (OreDictionary.getOres("ore" + name).size() > 0)
+ 				if (OreDictionary.getOres("ingot" + name).size() > 0)
+ 					return true;
+ 		return false;
+ 	}
 }
