@@ -19,8 +19,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy
 {
-	static CreativeTabs tab;
-	static String MODID = Lib.MODID;
+	CreativeTabs tab;
+	String MODID = Lib.MODID;
 
 	/**
 	 * @param item
