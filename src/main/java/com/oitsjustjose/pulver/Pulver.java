@@ -2,10 +2,8 @@ package com.oitsjustjose.pulver;
 
 import com.oitsjustjose.pulver.items.DustRegistry;
 import com.oitsjustjose.pulver.items.ItemDust;
-import com.oitsjustjose.pulver.proxy.ClientProxy;
 import com.oitsjustjose.pulver.proxy.CommonProxy;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fml.common.Mod;
@@ -15,7 +13,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid = Lib.MODID, name = Lib.NAME, version = Lib.VERSION, acceptedMinecraftVersions = "1.11", dependencies="after:*")
+@Mod(modid = Lib.MODID, name = Lib.NAME, version = Lib.VERSION, acceptedMinecraftVersions = "1.11")
 public class Pulver
 {
 	@Instance(Lib.MODID)
@@ -23,6 +21,7 @@ public class Pulver
 
 	@SidedProxy(clientSide = Lib.CLIENT_PROXY, serverSide = Lib.COMMON_PROXY, modId = Lib.MODID)
 	public static CommonProxy proxy;
+	
 	public static ItemDust dusts;
 
 	@EventHandler
@@ -30,11 +29,10 @@ public class Pulver
 	{
 		dusts = new ItemDust();
 		dustPostProcessing();
-		if (event.getSide().isClient())
-		{
-			ClientProxy.register(dusts);
-			Minecraft.getMinecraft().getItemColors().registerItemColorHandler(dusts, dusts);
-		}
+
+		proxy.register(dusts);
+		proxy.registerColorizers(dusts);
+
 	}
 
 	void dustPostProcessing()

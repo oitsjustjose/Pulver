@@ -1,6 +1,8 @@
 package com.oitsjustjose.pulver.proxy;
 
 import com.oitsjustjose.pulver.Lib;
+import com.oitsjustjose.pulver.items.IColorRegistry;
+import com.oitsjustjose.pulver.items.ItemDust;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -17,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy
 {
-	static CreativeTabs tab = CreativeTabs.REDSTONE;
+	static CreativeTabs tab;
 	static String MODID = Lib.MODID;
 
 	/**
@@ -25,8 +27,9 @@ public class ClientProxy extends CommonProxy
 	 *            The Item to register a model registry for. You still have to make the model file, but now MC will know where to look
 	 */
 	@SideOnly(Side.CLIENT)
-	public static void register(Item item)
+	public void register(Item item)
 	{
+		tab = item.getCreativeTab();
 		int meta = 0;
 
 		NonNullList<ItemStack> subItems = NonNullList.create();
@@ -46,8 +49,9 @@ public class ClientProxy extends CommonProxy
 	 *            The Item to register a model registry for. You still have to make the model file, but now MC will know where to look
 	 */
 	@SideOnly(Side.CLIENT)
-	public static void register(Block block)
+	public void register(Block block)
 	{
+		tab = block.getCreativeTabToDisplayOn();
 		int meta = 0;
 		ItemBlock itemBlock = new ItemBlock(block);
 		// Checks if the block has metadata / subtypes
@@ -67,5 +71,11 @@ public class ClientProxy extends CommonProxy
 		{
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(MODID + ":" + block.getUnlocalizedName().substring(MODID.length() + 6).toLowerCase(), "inventory"));
 		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void registerColorizers(ItemDust dust)
+	{
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IColorRegistry(dust), dust);
 	}
 }

@@ -1,10 +1,7 @@
 package com.oitsjustjose.pulver.items;
 
-import java.io.IOException;
-
 import com.oitsjustjose.pulver.Lib;
 
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("deprecation")
-public class ItemDust extends Item implements IItemColor
+public class ItemDust extends Item
 {
 	public DustRegistry registry;
 
@@ -28,11 +25,6 @@ public class ItemDust extends Item implements IItemColor
 		this.setUnlocalizedName(Lib.MODID + ".dust");
 		this.setRegistryName(new ResourceLocation(Lib.MODID, "dust"));
 		GameRegistry.register(this);
-	}
-
-	public int getMaxSubtypes()
-	{
-		return this.registry.getVariants().length;
 	}
 
 	@Override
@@ -62,27 +54,5 @@ public class ItemDust extends Item implements IItemColor
 			ItemStack stack = new ItemStack(item, 1, i);
 			list.add(stack);
 		}
-	}
-
-	@Override
-	public int getColorFromItemstack(ItemStack stack, int renderPass)
-	{
-		if (stack.getItemDamage() >= registry.getVariants().length)
-		{
-			return 0;
-		}
-		if (renderPass == 1)
-		{
-			try
-			{
-				return registry.getColorFromMeta(stack.getItemDamage());
-			}
-			catch (IOException e)
-			{
-				return 0xFFFFFF;
-			}
-		}
-		else
-			return 10724259;
 	}
 }

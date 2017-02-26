@@ -11,13 +11,15 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Credits to mezz. I had an idea where to start but..
  * 
  * http://bit.ly/2lVsa2a
  */
-
+@SideOnly(Side.CLIENT)
 public class ColorUtils
 {
 	
