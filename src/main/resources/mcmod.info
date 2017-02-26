@@ -2,13 +2,13 @@
 {
   "modid": "pulver",
   "name": "Pulver",
-  "description": "A dynamic dust-adding mod",
+  "description": "A fully dynamic dust-adding mod with no duplicates!",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
+  "url": "https://minecraft.curseforge.com/projects/pulver",
+  "updateUrl": "https://raw.githubusercontent.com/oitsjustjose/Pulver/master/updater.json",
   "authorList": ["oitsjustjose"],
-  "credits": "",
+  "credits": "Mezz, for JEI's codebase which helped me auto-gather colorization",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

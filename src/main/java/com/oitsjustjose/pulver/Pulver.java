@@ -21,7 +21,6 @@ public class Pulver
 
 	@SidedProxy(clientSide = Lib.CLIENT_PROXY, serverSide = Lib.COMMON_PROXY, modId = Lib.MODID)
 	public static CommonProxy proxy;
-	
 	public static ItemDust dusts;
 
 	@EventHandler
