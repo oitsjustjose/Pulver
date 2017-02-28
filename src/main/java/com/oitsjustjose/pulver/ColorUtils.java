@@ -22,12 +22,24 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ColorUtils
 {
-	
+
 	public static int getColor(ItemStack itemstack) throws IOException
 	{
 		BufferedImage image = getBufferedImage(itemstack);
-
-		return image == null ? 0 : image.getRGB(image.getHeight() / 2, image.getWidth() / 2);
+		try
+		{
+			int x = image.getWidth() / 2;
+			int y = image.getHeight() / 2;
+			return image.getRGB(x, y);
+		}
+		catch (NullPointerException e)
+		{
+			return 0;
+		}
+		catch (ArrayIndexOutOfBoundsException e)
+		{
+			return image.getRGB(0, 0);
+		}
 	}
 
 	@Nullable
@@ -39,10 +51,15 @@ public class ColorUtils
 		IBakedModel itemModel = itemModelMesher.getItemModel(itemstack);
 		TextureAtlasSprite textureAtlasSprite = itemModel.getParticleTexture();
 
+		if (textureAtlasSprite == null)
+		{
+			return null;
+		}
+
 		final int iconWidth = textureAtlasSprite.getIconWidth();
 		final int iconHeight = textureAtlasSprite.getIconHeight();
 		final int frameCount = textureAtlasSprite.getFrameCount();
-		
+
 		if (iconWidth <= 0 || iconHeight <= 0 || frameCount <= 0)
 		{
 			return null;
