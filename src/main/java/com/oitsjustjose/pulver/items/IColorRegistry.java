@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class IColorRegistry implements IItemColor
 {
-	DustRegistry registry;
+	IDustRegistry registry;
 
 	public IColorRegistry(ItemDust itemDust)
 	{

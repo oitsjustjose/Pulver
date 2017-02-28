@@ -15,11 +15,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SuppressWarnings("deprecation")
 public class ItemDust extends Item
 {
-	public DustRegistry registry;
+	public IDustRegistry registry;
 
 	public ItemDust()
 	{
-		registry = new DustRegistry();
+		registry = new IDustRegistry();
 		this.setHasSubtypes(true);
 		this.setCreativeTab(CreativeTabs.MATERIALS);
 		this.setUnlocalizedName(Lib.MODID + ".dust");

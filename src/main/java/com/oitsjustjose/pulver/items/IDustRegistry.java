@@ -9,12 +9,12 @@ import com.oitsjustjose.pulver.ColorUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class DustRegistry
+public class IDustRegistry
 {
 	private Map<String, ItemStack> ENTRIES;
 	private Map<String, Integer> COLORS;
 
-	public DustRegistry()
+	public IDustRegistry()
 	{
 		ENTRIES = new LinkedHashMap<String, ItemStack>();
 		COLORS = new LinkedHashMap<String, Integer>();

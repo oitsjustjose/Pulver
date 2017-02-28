@@ -1,6 +1,6 @@
 package com.oitsjustjose.pulver;
 
-import com.oitsjustjose.pulver.items.DustRegistry;
+import com.oitsjustjose.pulver.items.IDustRegistry;
 import com.oitsjustjose.pulver.items.ItemDust;
 import com.oitsjustjose.pulver.proxy.CommonProxy;
 
@@ -31,12 +31,11 @@ public class Pulver
 
 		proxy.register(dusts);
 		proxy.registerColorizers(dusts);
-
 	}
 
 	void dustPostProcessing()
 	{
-		DustRegistry reg = dusts.registry;
+		IDustRegistry reg = dusts.registry;
 		int meta = 0;
 
 		for (String s : reg.getVariants())
