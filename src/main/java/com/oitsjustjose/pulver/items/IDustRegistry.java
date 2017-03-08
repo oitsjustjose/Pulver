@@ -29,6 +29,19 @@ public class IDustRegistry
 					registerDust(ore.substring(3), OreDictionary.getOres("ingot" + (ore.substring(3))).get(0));
 	}
 
+	public ItemStack getPairedItemstack(int meta)
+	{
+		int marker = 0;
+
+		for (ItemStack i : ENTRIES.values())
+		{
+			if (marker == meta)
+				return i;
+			marker++;
+		}
+		return null;
+	}
+
 	/**
 	 * @return An array of all the names added to the list
 	 */
@@ -127,13 +140,13 @@ public class IDustRegistry
 	 *            The OreDict Name to to check for registration status
 	 * @return True if there isn't a dust, and IS an ore and ingot for name
 	 */
-	 private boolean shouldRegister(String name)
- 	{
- 		// Then checks to see if there's NO other dusts, and an ore AND ingot version exist!
- 		if (OreDictionary.getOres("dust" + name).size() <= 0)
- 			if (OreDictionary.getOres("ore" + name).size() > 0)
- 				if (OreDictionary.getOres("ingot" + name).size() > 0)
- 					return true;
- 		return false;
- 	}
+	private boolean shouldRegister(String name)
+	{
+		// Then checks to see if there's NO other dusts, and an ore AND ingot version exist!
+		if (OreDictionary.getOres("dust" + name).size() <= 0)
+			if (OreDictionary.getOres("ore" + name).size() > 0)
+				if (OreDictionary.getOres("ingot" + name).size() > 0)
+					return true;
+		return false;
+	}
 }
