@@ -142,11 +142,10 @@ public class IDustRegistry
 	 */
 	private boolean shouldRegister(String name)
 	{
-		// Then checks to see if there's NO other dusts, and an ore AND ingot version exist!
-		if (OreDictionary.getOres("dust" + name).size() <= 0)
-			if (OreDictionary.getOres("ore" + name).size() > 0)
-				if (OreDictionary.getOres("ingot" + name).size() > 0)
-					return true;
-		return false;
+		boolean hasDust = OreDictionary.getOres("dust" + name).size() > 0;
+		boolean hasOre = OreDictionary.getOres("ore" + name).size() > 0;
+		boolean hasIngot = OreDictionary.getOres("ingot" + name).size() > 0;
+
+		return !hasDust && hasOre && hasIngot;
 	}
 }
