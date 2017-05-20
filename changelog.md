@@ -1,3 +1,10 @@
+1.0:
+I think this is a pretty complete mod. Does great things
+* Added: Debug mode for when I'm developing
+* Added: Tooltip when in Debug mode (F3 + H) showing what mod necessitates the dust
+* Changed: Textures! Thanks to CyanideX once again!
+* Changed: Internal stuff, mostly just refactors but a few nice things.
+
 1.0.0.2:
 * Fixed: Server crash on startup
 
