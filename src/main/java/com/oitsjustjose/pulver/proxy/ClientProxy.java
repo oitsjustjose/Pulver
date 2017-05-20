@@ -41,7 +41,6 @@ public class ClientProxy extends CommonProxy
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(MODID + ":" + name, "inventory"));
 			meta++;
 		}
-
 	}
 
 	/**
@@ -63,14 +62,19 @@ public class ClientProxy extends CommonProxy
 			{
 				String name = itemBlock.getUnlocalizedName(sub).toLowerCase().replace(MODID + ".", "").replace("tile.", "");
 				ModelBakery.registerItemVariants(itemBlock, new ResourceLocation(MODID, name));
-				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, new ModelResourceLocation(MODID + ":" + name, "inventory"));
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, meta, getLocation(block));
 				meta++;
 			}
 		}
 		else
 		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(MODID + ":" + block.getUnlocalizedName().substring(MODID.length() + 6).toLowerCase(), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, getLocation(block));
 		}
+	}
+
+	private ModelResourceLocation getLocation(Block block)
+	{
+		return new ModelResourceLocation(MODID + ":" + block.getUnlocalizedName().substring(6).toLowerCase(), "inventory");
 	}
 	
 	@SideOnly(Side.CLIENT)
