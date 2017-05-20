@@ -34,7 +34,7 @@ minecraft {
   replaceIn "/Pulver.java"
   replace "@VERSION@", mod_version
 
-  mappings = "snapshot_20170114"
+  mappings = "${mappings_version}"
 }
 
 dependencies {
@@ -51,11 +51,8 @@ artifacts{
 
 processResources
 {
-    // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 		expand 'version':project.version, 'mcversion':project.minecraft.version
