@@ -1,13 +1,10 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -23,21 +20,13 @@ compileJava {
 
 minecraft {
     version = "${minecraft_version}-${forge_version}"
+    runDir = "run"
 
-	if (file('../run').exists()){
-	runDir = "../run"
-	} else {
-		runDir = "run"
-	}
+    useDepAts = true
+    replaceIn "/Pulver.java"
+    replace "@VERSION@", mod_version
 
-  useDepAts = true
-  replaceIn "/Pulver.java"
-  replace "@VERSION@", mod_version
-
-  mappings = "${mappings_version}"
-}
-
-dependencies {
+    mappings = "${mappings_version}"
 }
 
 task deobfJar(type: Jar) {
@@ -55,7 +44,7 @@ processResources
     inputs.property "mcversion", project.minecraft.version
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-		expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.version, 'mcversion':project.minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {
