@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = mod_version
 group= "com.oitsjustjose.pulver"
-archivesBaseName = "Pulver-1.11.x"
+archivesBaseName = "Pulver-${minecraft_version}"
 
 sourceCompatibility = targetCompatibility = "1.8"
 compileJava {
