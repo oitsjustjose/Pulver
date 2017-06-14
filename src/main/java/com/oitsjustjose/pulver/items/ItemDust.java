@@ -5,21 +5,21 @@ import java.util.List;
 import com.oitsjustjose.pulver.Lib;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("deprecation")
 public class ItemDust extends Item
 {
 	public IDustRegistry registry;
@@ -54,9 +54,9 @@ public class ItemDust extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack itemstack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack itemstack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
-		if (Minecraft.getMinecraft().gameSettings.advancedItemTooltips)	
+		if (Minecraft.getMinecraft().gameSettings.advancedItemTooltips)
 			tooltip.add(I18n.translateToLocal("tooltip.added") + getModID(registry.getPairedItemstack(itemstack.getItemDamage())));
 	}
 
@@ -74,11 +74,11 @@ public class ItemDust extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < registry.getVariants().length; i++)
 		{
-			ItemStack stack = new ItemStack(item, 1, i);
+			ItemStack stack = new ItemStack(this, 1, i);
 			list.add(stack);
 		}
 	}

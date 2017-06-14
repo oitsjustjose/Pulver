@@ -33,7 +33,7 @@ public class ClientProxy extends CommonProxy
 		int meta = 0;
 
 		NonNullList<ItemStack> subItems = NonNullList.create();
-		item.getSubItems(item, tab, subItems);
+		item.getSubItems(tab, subItems);
 		for (ItemStack sub : subItems)
 		{
 			String name = item.getUnlocalizedName(sub).substring(MODID.length() + 6).toLowerCase();
@@ -57,7 +57,7 @@ public class ClientProxy extends CommonProxy
 		if (itemBlock.getHasSubtypes())
 		{
 			NonNullList<ItemStack> subItems = NonNullList.create();
-			itemBlock.getSubItems(itemBlock, tab, subItems);
+			itemBlock.getSubItems(tab, subItems);
 			for (ItemStack sub : subItems)
 			{
 				String name = itemBlock.getUnlocalizedName(sub).toLowerCase().replace(MODID + ".", "").replace("tile.", "");
@@ -76,7 +76,7 @@ public class ClientProxy extends CommonProxy
 	{
 		return new ModelResourceLocation(MODID + ":" + block.getUnlocalizedName().substring(6).toLowerCase(), "inventory");
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public void registerColorizers(ItemDust dust)
 	{
