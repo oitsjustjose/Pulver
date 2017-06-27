@@ -16,10 +16,11 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SuppressWarnings("deprecation")
 public class ItemDust extends Item
 {
 	public IDustRegistry registry;
@@ -31,7 +32,7 @@ public class ItemDust extends Item
 		this.setCreativeTab(CreativeTabs.MATERIALS);
 		this.setUnlocalizedName(Lib.MODID + ".dust");
 		this.setRegistryName(new ResourceLocation(Lib.MODID, "dust"));
-		GameRegistry.register(this);
+		ForgeRegistries.ITEMS.register(this);
 	}
 
 	@Override
