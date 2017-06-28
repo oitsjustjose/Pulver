@@ -29,7 +29,7 @@ public class ItemDust extends Item
 	{
 		registry = new IDustRegistry();
 		this.setHasSubtypes(true);
-		this.setCreativeTab(CreativeTabs.MATERIALS);
+		this.setCreativeTab(CreativeTabs.MISC);
 		this.setUnlocalizedName(Lib.MODID + ".dust");
 		this.setRegistryName(new ResourceLocation(Lib.MODID, "dust"));
 		ForgeRegistries.ITEMS.register(this);
@@ -77,10 +77,12 @@ public class ItemDust extends Item
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
-		for (int i = 0; i < registry.getVariants().length; i++)
+		if (this.isInCreativeTab(tab))
 		{
-			ItemStack stack = new ItemStack(this, 1, i);
-			list.add(stack);
+			for (int i = 0; i < registry.getVariants().length; ++i)
+			{
+				list.add(new ItemStack(this, 1, i));
+			}
 		}
 	}
 }
