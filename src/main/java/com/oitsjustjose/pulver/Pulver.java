@@ -36,7 +36,7 @@ public class Pulver
 			debug();
 			LogManager.getLogger(Lib.MODID).info("Debug OreDict Entries Initialized");
 		}
-		
+
 		dusts = new ItemDust();
 		dustPostProcessing();
 
@@ -51,7 +51,9 @@ public class Pulver
 
 		for (String s : reg.getVariants())
 		{
-			FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(dusts, 1, meta), OreDictionary.getOres("ingot" + s).get(0), 0.0F);
+			ItemStack ingot = OreDictionary.getOres("ingot" + s).get(0);
+			float exp = FurnaceRecipes.instance().getSmeltingExperience(ingot);
+			FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(dusts, 1, meta), ingot, exp);
 			OreDictionary.registerOre("dust" + s, new ItemStack(dusts, 1, meta));
 			meta++;
 		}
