@@ -1,6 +1,7 @@
 1.0a:
 * Updated: Forge, should no longer crash
 * Broke: **Textures. I am aware they are broken. I do not know how to fix them.**
+
 1.0:
 I think this is a pretty complete mod. Does great things
 * Added: Debug mode for when I'm developing
