@@ -36,7 +36,7 @@ public class ClientProxy extends CommonProxy
 		item.getSubItems(tab, subItems);
 		for (ItemStack sub : subItems)
 		{
-			String name = item.getUnlocalizedName(sub).substring(MODID.length() + 6).toLowerCase();
+			String name = item.getUnlocalizedName(sub).toLowerCase().replace(MODID + ".", "").replace("item.", "");
 			ModelBakery.registerItemVariants(item, new ResourceLocation(MODID, name));
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(MODID + ":" + name, "inventory"));
 			meta++;
@@ -71,7 +71,7 @@ public class ClientProxy extends CommonProxy
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, 0, getLocation(block));
 		}
 	}
-
+	
 	private ModelResourceLocation getLocation(Block block)
 	{
 		return new ModelResourceLocation(MODID + ":" + block.getUnlocalizedName().substring(6).toLowerCase(), "inventory");

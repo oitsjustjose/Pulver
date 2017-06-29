@@ -14,7 +14,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid = Lib.MODID, name = Lib.NAME, version = Lib.VERSION, acceptedMinecraftVersions = "1.11")
@@ -28,7 +29,13 @@ public class Pulver
 	public static ItemDust dusts;
 
 	@EventHandler
-	public void postInit(FMLInitializationEvent event)
+	public void initItems(FMLPreInitializationEvent event)
+	{
+		dusts = new ItemDust();
+	}
+
+	@EventHandler
+	public void post(FMLPostInitializationEvent event)
 	{
 		if ((Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment"))
 		{
@@ -37,7 +44,7 @@ public class Pulver
 			LogManager.getLogger(Lib.MODID).info("Debug OreDict Entries Initialized");
 		}
 
-		dusts = new ItemDust();
+		dusts.registry.initEntries();
 		dustPostProcessing();
 
 		proxy.register(dusts);
@@ -51,9 +58,7 @@ public class Pulver
 
 		for (String s : reg.getVariants())
 		{
-			ItemStack ingot = OreDictionary.getOres("ingot" + s).get(0);
-			float exp = FurnaceRecipes.instance().getSmeltingExperience(ingot);
-			FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(dusts, 1, meta), ingot, exp);
+			FurnaceRecipes.instance().addSmeltingRecipe(new ItemStack(dusts, 1, meta), OreDictionary.getOres("ingot" + s).get(0), 0.0F);
 			OreDictionary.registerOre("dust" + s, new ItemStack(dusts, 1, meta));
 			meta++;
 		}

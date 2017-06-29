@@ -18,7 +18,6 @@ public class IDustRegistry
 	{
 		ENTRIES = new LinkedHashMap<String, ItemStack>();
 		COLORS = new LinkedHashMap<String, Integer>();
-		initEntries();
 	}
 
 	public void initEntries()
