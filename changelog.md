@@ -1,6 +1,8 @@
 1.0a:
 * Updated: Forge, should no longer crash
-* Broke: **Textures. I am aware they are broken. I do not know how to fix them.**
+* Fixed: Experience values from smelting. They should be spot-on now!
+* Fixed: Textures. If your textures are/were broken, re-download this version - they've been fixed.
+* Changed: *Internal:* Ordering of object declaration in Mod class (some stuff moved to pre-init, hardly any). 
 
 1.0:
 I think this is a pretty complete mod. Does great things
