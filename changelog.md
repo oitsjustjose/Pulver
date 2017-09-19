@@ -1,3 +1,6 @@
+1.1:
+* Fixed: NPE on dusts leftover from removed mods
+
 1.0a:
 * Updated: Forge, should no longer crash
 * Fixed: Experience values from smelting. They should be spot-on now!
