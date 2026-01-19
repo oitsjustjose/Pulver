@@ -1,4 +1,3 @@
-# Pulver
-A mod which dynamically adds dusts for Ores which have Ingots in the Ore Dictionary!
+# This Repo has Moved!
 
-Specifically made with Actually Additions in mind!
+This repository has been moved to a [new location!](https://git.oitsjustjose.com/me/Pulver)
